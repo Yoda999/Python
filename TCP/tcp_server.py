@@ -15,5 +15,14 @@ while True:
     client_handler = threading.Thread(target = handle_client, args = client)
     client_handler.start()
     
+def handle_client(client_socket):
+    with client_socket as sock:
+        request = sock.recv(1024)
+        print(f'[*] Received: {request.decode("utf-8")}')
+        sock.send(B'ACK')
+
+if __name__ == '__main__':
+    main()
+    
     
 
